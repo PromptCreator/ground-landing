@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --paper:      #F3EFE5;
+  --paper-2:    #FBF8F1;
+  --ink:        #1C1B18;
+  --ink-2:      #5E5B54;
+  --ink-3:      #8A867D;
+  --line:       #DCD4C0;
+  --line-2:     #EAE4D3;
+  --accent:     #B8853F;
+  --accent-deep:#7A5425;
+  --counter:    #A8432E;
+  --data:       #4A6741;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.font-serif-ko {
+  font-family: 'Noto Serif KR', 'Fraunces', Georgia, serif;
+}
+
+.label-caps {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+hr.hairline {
+  border: none;
+  border-top: 1px solid var(--line);
+}
