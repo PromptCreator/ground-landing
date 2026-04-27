@@ -17,13 +17,17 @@ const fraunces = Fraunces({
 });
 
 const GA_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID;
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
 export const metadata: Metadata = {
-  title: "Ground — 의사결정 근거 패키지를 3초 만에",
-  description: "지역 뉴스·상권 데이터·반대 의견까지. Ground가 3초 만에 의사결정 근거 패키지를 묶어 드립니다.",
+  metadataBase: new URL(SITE_URL),
+  title: "Ground — 흩어진 출처를 한 번에 묶는 OSINT 워크벤치",
+  description: "통신사 헤드라인·1차 자료·반론까지. 사건이 터졌을 때 Ground가 출처를 한 번에 묶어 OSINT 브리프로 정리합니다.",
   openGraph: {
-    title: "Ground — 의사결정 근거 패키지를 3초 만에",
-    description: "지역 매장 운영자를 위한 AI 의사결정 도우미. 베타 출시 알림 신청하세요.",
+    title: "Ground — 흩어진 출처를 한 번에 묶는 OSINT 워크벤치",
+    description: "지정학·국제정세를 추적하는 사람을 위한 OSINT 워크벤치. 베타 출시 알림 신청하세요.",
     images: [{ url: "/og.png", width: 1200, height: 630 }],
   },
   robots: { index: false, follow: false },

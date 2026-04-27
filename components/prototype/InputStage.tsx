@@ -1,9 +1,9 @@
 "use client";
 
 const SAMPLES = [
-  "홍대 카페 창업 가능성",
-  "판교 런치 배달 수요",
-  "강남역 공유오피스 경쟁",
+  "이스라엘–이란 4월 충돌 격화",
+  "BRICS 확대와 달러 결제망 재편",
+  "남중국해 항행 분쟁 — 필리핀·중국",
 ];
 
 interface Props {
@@ -23,7 +23,7 @@ export default function InputStage({ query, onQueryChange, onGenerate, onSample 
   return (
     <div className="p-6 sm:p-8">
       <p className="label-caps mb-4" style={{ color: "var(--ink-3)" }}>
-        어떤 결정을 앞두고 있나요?
+        어떤 사건을 조사 중인가요?
       </p>
 
       <div className="flex flex-wrap gap-2 mb-5">
@@ -59,7 +59,7 @@ export default function InputStage({ query, onQueryChange, onGenerate, onSample 
           type="text"
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
-          placeholder="예) 성수동 팝업스토어 입지 분석"
+          placeholder="예) 우크라이나 곡물 협정 결렬과 식량 시장 영향"
           className="flex-1 px-4 py-3 rounded-sm border text-sm outline-none transition-colors"
           style={{
             borderColor: "var(--line)",
@@ -79,7 +79,7 @@ export default function InputStage({ query, onQueryChange, onGenerate, onSample 
             opacity: query.trim() ? 1 : 0.4,
           }}
         >
-          근거 묶기 →
+          리서치 시작 →
         </button>
       </form>
     </div>
