@@ -5,12 +5,13 @@ import { track } from "@/components/analytics/track";
 import InputStage from "./InputStage";
 import LoadingStage from "./LoadingStage";
 import ResultStage from "./ResultStage";
+import WorldMap from "./WorldMap";
 
 type Stage = "input" | "loading" | "result";
 
 let interacted = false;
 
-function fireInteract(action: "sample" | "generate" | "copy") {
+function fireInteract(action: "sample" | "generate" | "copy" | "map") {
   if (interacted) return;
   interacted = true;
   track("prototype_interact", { action });
@@ -35,6 +36,14 @@ export default function PrototypeApp() {
     setQuery(q);
   }, []);
 
+  const handleMapSelect = useCallback(
+    (q: string) => {
+      fireInteract("map");
+      handleGenerate(q);
+    },
+    [handleGenerate]
+  );
+
   const handleCopy = useCallback(() => {
     fireInteract("copy");
   }, []);
@@ -46,17 +55,29 @@ export default function PrototypeApp() {
   }, []);
 
   return (
-    <div
-      className="rounded-sm border overflow-hidden"
-      style={{ borderColor: "var(--line)", background: "var(--paper-2)" }}
-    >
-      {stage === "input" && (
-        <InputStage query={query} onQueryChange={setQuery} onGenerate={handleGenerate} onSample={handleSample} />
-      )}
-      {stage === "loading" && <LoadingStage query={query} />}
-      {stage === "result" && result && (
-        <ResultStage query={query} result={result} onCopy={handleCopy} onReset={handleReset} />
-      )}
+    <div className="space-y-6">
+      <div
+        className="rounded-sm border p-4 sm:p-6"
+        style={{ borderColor: "var(--line)", background: "var(--paper-2)" }}
+      >
+        <WorldMap
+          onSelect={handleMapSelect}
+          active={stage !== "input" ? query : undefined}
+          disabled={stage === "loading"}
+        />
+      </div>
+      <div
+        className="rounded-sm border overflow-hidden"
+        style={{ borderColor: "var(--line)", background: "var(--paper-2)" }}
+      >
+        {stage === "input" && (
+          <InputStage query={query} onQueryChange={setQuery} onGenerate={handleGenerate} onSample={handleSample} />
+        )}
+        {stage === "loading" && <LoadingStage query={query} />}
+        {stage === "result" && result && (
+          <ResultStage query={query} result={result} onCopy={handleCopy} onReset={handleReset} />
+        )}
+      </div>
     </div>
   );
 }
