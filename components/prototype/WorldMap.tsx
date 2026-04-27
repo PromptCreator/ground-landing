@@ -8,17 +8,40 @@ import type { Feature, FeatureCollection, Geometry } from "geojson";
 const WIDTH = 800;
 const HEIGHT = 380;
 
+type Category = "active" | "tension" | "structural";
+
 interface Hotspot {
   id: string;
   coords: [number, number];
   label: string;
+  category: Category;
   query: string;
 }
 
 const HOTSPOTS: Hotspot[] = [
-  { id: "me", coords: [40, 32], label: "이스라엘–이란", query: "이스라엘–이란 4월 충돌 격화" },
-  { id: "brics", coords: [78, 25], label: "BRICS · 결제망", query: "BRICS 확대와 달러 결제망 재편" },
-  { id: "scs", coords: [115, 15], label: "남중국해", query: "남중국해 항행 분쟁 — 필리핀·중국" },
+  // Active conflict
+  { id: "uk", coords: [32, 49], label: "우크라이나 전선", category: "active", query: "우크라이나 전선 교착과 EU 지원안" },
+  { id: "me", coords: [40, 32], label: "이스라엘–이란", category: "active", query: "이스라엘–이란 4월 충돌 격화" },
+  { id: "sd", coords: [33, 15], label: "수단 내전", category: "active", query: "수단 RSF·SAF 내전 격화" },
+  // Tension
+  { id: "scs", coords: [115, 15], label: "남중국해", category: "tension", query: "남중국해 항행 분쟁 — 필리핀·중국" },
+  { id: "kp", coords: [127, 39], label: "한반도", category: "tension", query: "북한 미사일 시험과 한반도 안보" },
+  { id: "vg", coords: [-61, 6], label: "에세키보", category: "tension", query: "베네수엘라–가이아나 에세키보 영토 분쟁" },
+  // Structural shift
+  { id: "brics", coords: [78, 25], label: "BRICS · 결제망", category: "structural", query: "BRICS 확대와 달러 결제망 재편" },
+  { id: "sahel", coords: [0, 14], label: "사헬 쿠데타 벨트", category: "structural", query: "사헬 쿠데타 벨트 — 말리·부르키나파소·니제르" },
+];
+
+const COLOR: Record<Category, string> = {
+  active: "var(--counter)",
+  tension: "var(--accent)",
+  structural: "var(--data)",
+};
+
+const LEGEND: { category: Category; label: string }[] = [
+  { category: "active", label: "활성 분쟁" },
+  { category: "tension", label: "긴장 고조" },
+  { category: "structural", label: "구조 재편" },
 ];
 
 interface Props {
@@ -79,6 +102,7 @@ export default function WorldMap({ onSelect, active, disabled }: Props) {
               const [x, y] = p;
               const isActive = active === h.query;
               const showLabel = hovered === h.id || isActive;
+              const color = COLOR[h.category];
               return (
                 <g
                   key={h.id}
@@ -89,21 +113,21 @@ export default function WorldMap({ onSelect, active, disabled }: Props) {
                   style={{ cursor: disabled ? "default" : "pointer" }}
                 >
                   <circle
-                    r={14}
-                    fill="var(--accent)"
-                    opacity={0.2}
+                    r={13}
+                    fill={color}
+                    opacity={0.22}
                     className="animate-ping"
                   />
                   <circle
-                    r={isActive ? 7 : 5}
-                    fill="var(--accent)"
+                    r={isActive ? 6.5 : 4.5}
+                    fill={color}
                     stroke="var(--paper)"
                     strokeWidth={1.5}
                   />
                   {showLabel && (
                     <g pointerEvents="none">
                       <rect
-                        x={10}
+                        x={9}
                         y={-22}
                         rx={2}
                         width={Math.max(7.2 * h.label.length, 70)}
@@ -112,7 +136,7 @@ export default function WorldMap({ onSelect, active, disabled }: Props) {
                         opacity={0.92}
                       />
                       <text
-                        x={14}
+                        x={13}
                         y={-9}
                         fontSize={11}
                         fill="var(--paper)"
@@ -127,8 +151,21 @@ export default function WorldMap({ onSelect, active, disabled }: Props) {
             })}
         </g>
       </svg>
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+        {LEGEND.map((l) => (
+          <div key={l.category} className="flex items-center gap-2">
+            <span
+              className="inline-block w-2 h-2 rounded-full"
+              style={{ background: COLOR[l.category] }}
+            />
+            <span className="label-caps" style={{ color: "var(--ink-3)" }}>
+              {l.label}
+            </span>
+          </div>
+        ))}
+      </div>
       <p
-        className="label-caps mt-3 text-center"
+        className="label-caps mt-2 text-center"
         style={{ color: "var(--ink-3)" }}
       >
         지도 위 핫스팟 클릭 → OSINT 브리프 자동 로드
