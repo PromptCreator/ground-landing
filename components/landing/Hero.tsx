@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { track } from "@/components/analytics/track";
 
 const BETA_COUNT = process.env.NEXT_PUBLIC_BETA_COUNT ?? "127";
-const SOURCE_COUNT = process.env.NEXT_PUBLIC_SOURCE_COUNT ?? "32";
+const DISTRICT_COUNT = process.env.NEXT_PUBLIC_DISTRICT_COUNT ?? "8";
 
 export default function Hero() {
   return (
@@ -15,32 +15,36 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
+          {/* 상태 표시 */}
           <div className="flex items-center gap-2 mb-8">
             <span
               className="inline-block w-2 h-2 rounded-full animate-pulse"
               style={{ background: "var(--data)" }}
             />
             <span className="label-caps" style={{ color: "var(--ink-3)" }}>
-              전 세계 {SOURCE_COUNT}개 통신사 · UTC 실시간
+              서울 25개 자치구 · 방금 전 업데이트
             </span>
           </div>
 
+          {/* 헤드라인 */}
           <h1
             className="font-serif-ko text-4xl sm:text-6xl leading-[1.1] tracking-tight mb-6"
             style={{ color: "var(--ink)" }}
           >
-            흩어진 출처를 한 번에,<br />
-            OSINT 워크벤치.
+            결정을 내리기 전,<br />
+            근거부터 모읍니다.
           </h1>
 
+          {/* 서브 헤드라인 */}
           <p
             className="text-base sm:text-lg mb-10 max-w-xl leading-relaxed"
             style={{ color: "var(--ink-2)" }}
           >
-            통신사 헤드라인·1차 자료·반론까지.<br />
-            사건이 터졌을 때 Ground가 출처를 한 번에 묶어 OSINT 브리프로 정리합니다.
+            지역 뉴스·상권 데이터·반대 의견까지.<br />
+            Ground가 3초 만에 의사결정 근거 패키지를 묶어 드립니다.
           </p>
 
+          {/* CTA */}
           <div className="flex flex-wrap gap-3 mb-10">
             <a
               href="#prototype"
@@ -48,7 +52,7 @@ export default function Hero() {
               className="px-6 py-3 rounded-sm text-sm font-semibold transition-opacity"
               style={{ background: "var(--accent)", color: "#fff" }}
             >
-              워크벤치 체험하기 →
+              프로토타입 체험하기 →
             </a>
             <a
               href="#signup"
@@ -60,8 +64,9 @@ export default function Hero() {
             </a>
           </div>
 
+          {/* Trust row */}
           <p className="label-caps" style={{ color: "var(--ink-3)" }}>
-            베타 대기자 {BETA_COUNT}명 · 글로벌 {SOURCE_COUNT}개 통신사 모니터링 중
+            베타 대기자 {BETA_COUNT}명 · 서울 {DISTRICT_COUNT}개 자치구 데이터 수집 중
           </p>
         </motion.div>
       </div>

@@ -25,7 +25,7 @@ export default function ResultStage({ query, result, onCopy, onReset }: Props) {
     <div className="p-6 sm:p-8">
       <div className="flex items-center justify-between mb-4">
         <p className="label-caps" style={{ color: "var(--ink-3)" }}>
-          OSINT 브리프 — &ldquo;{query}&rdquo;
+          근거 패키지 — &ldquo;{query}&rdquo;
         </p>
         <div className="flex gap-2">
           <button

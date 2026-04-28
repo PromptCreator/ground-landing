@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 const STEPS = [
-  "주요 통신사 헤드라인 수집 중…",
-  "1차 자료·정부 발표 대조 중…",
-  "반대·대안 해석 정리 중…",
-  "OSINT 브리프 묶는 중…",
+  "지역 뉴스 스캔 중…",
+  "상권 데이터 수집 중…",
+  "반대 의견 정리 중…",
+  "근거 패키지 묶는 중…",
 ];
 
 interface Props {
