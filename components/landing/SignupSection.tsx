@@ -26,8 +26,8 @@ function markSubmitted() {
   } catch {}
 }
 
-const INDUSTRIES = ["저널리스트", "애널리스트", "연구자", "학생/기타"];
-const REGIONS = ["동아시아", "유럽", "중동", "아메리카", "글로벌"];
+const INDUSTRIES = ["카페", "음식점", "소매", "기타"];
+const REGIONS = ["강남", "홍대", "판교", "기타"];
 
 export default function SignupSection() {
   const [email, setEmail] = useState("");
@@ -151,7 +151,7 @@ export default function SignupSection() {
               {showExtra && (
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="label-caps block mb-1.5" style={{ color: "var(--ink-3)" }}>역할</label>
+                    <label className="label-caps block mb-1.5" style={{ color: "var(--ink-3)" }}>업종</label>
                     <select
                       value={industry}
                       onChange={(e) => setIndustry(e.target.value)}
@@ -163,7 +163,7 @@ export default function SignupSection() {
                     </select>
                   </div>
                   <div>
-                    <label className="label-caps block mb-1.5" style={{ color: "var(--ink-3)" }}>관심 권역</label>
+                    <label className="label-caps block mb-1.5" style={{ color: "var(--ink-3)" }}>지역</label>
                     <select
                       value={region}
                       onChange={(e) => setRegion(e.target.value)}

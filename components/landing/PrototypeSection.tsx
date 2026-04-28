@@ -27,7 +27,7 @@ export default function PrototypeSection() {
             className="text-center text-sm sm:text-base mb-10"
             style={{ color: "var(--ink-2)" }}
           >
-            조사할 사건을 입력하면 OSINT 브리프를 묶어 드립니다.
+            결정을 앞둔 상황을 입력하면 근거 패키지를 묶어 드립니다.
           </p>
 
           <PrototypeApp />

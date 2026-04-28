@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="py-8 px-6 text-center">
       <hr className="hairline mb-8" />
       <p className="label-caps" style={{ color: "var(--ink-3)" }}>
-        © 2026 Ground — OSINT 베타
+        © 2025 Ground — 수요 검증 베타
       </p>
     </footer>
   );
